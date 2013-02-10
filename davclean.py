@@ -20,7 +20,7 @@ for options in options_list:
 		returncode = 0
 	
 		conn = httplib.HTTPSConnection(options["host"])
-		headers = {"Depth": "1", "Authorization": 'Basic ' + string.strip(base64.encodestring(options["user"] + ':' + options["password"]))}
+		headers = {"Depth": "1", "Authorization": 'Basic ' + base64.encodestring(options["user"] + ':' + options["password"]).strip()}
 		conn.request("PROPFIND", remotedir, "", headers)
 		response = conn.getresponse()
 		data = response.read()
@@ -47,7 +47,7 @@ for options in options_list:
 		returncode = 1
 		continue
 
-	headers = {"Authorization": 'Basic ' + string.strip(base64.encodestring(options["user"] + ':' + options["password"]))}
+	headers = {"Authorization": 'Basic ' + base64.encodestring(options["user"] + ':' + options["password"]).strip()}
 	for url in targeturls:
 		try:
 #			print "removing " + href
