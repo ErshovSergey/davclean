@@ -20,7 +20,7 @@ for options in options_list:
 		returncode = 0
 	
 		conn = httplib.HTTPSConnection(options["host"])
-		headers = {"Depth": "2", "Authorization": 'Basic ' + string.strip(base64.encodestring(options["user"] + ':' + options["password"]))}
+		headers = {"Depth": "1", "Authorization": 'Basic ' + string.strip(base64.encodestring(options["user"] + ':' + options["password"]))}
 		conn.request("PROPFIND", remotedir, "", headers)
 		response = conn.getresponse()
 		data = response.read()
