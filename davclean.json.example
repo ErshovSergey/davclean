@@ -6,11 +6,11 @@
         "remotedir": "/dir1",
         "targets": [
             [
-                "/db-",
+                "/dir1/db-",
                 15
             ],
             [
-                "/upload-",
+                "/dir1/upload-",
                 7
             ]
         ]
@@ -22,11 +22,11 @@
         "remotedir": "/dir1",
         "targets": [
             [
-                "/db-",
+                "/dir2/db-",
                 15
             ],
             [
-                "/upload-",
+                "/dir2/upload-",
                 7
             ]
         ]
