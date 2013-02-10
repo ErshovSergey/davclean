@@ -13,11 +13,11 @@ import json
 f = open('/usr/local/etc/davclean.json', 'r')
 options_list = json.load(f,"utf-8")
 f.close()
+returncode = 0
 
 for options in options_list:
 	try:
 		remotedir=urllib.quote(options["remotedir"].encode("utf-8"))
-		returncode = 0
 	
 		conn = httplib.HTTPSConnection(options["host"])
 		headers = {"Depth": "1", "Authorization": 'Basic ' + base64.encodestring(options["user"] + ':' + options["password"]).strip()}
@@ -38,7 +38,7 @@ for options in options_list:
 #			print "found " +  href
 			for t in options["targets"]:
 				if href.startswith(t[0]) and ( ( now - datetime.timedelta(days=t[1])) >  cdatetime ):
-					targeturls.append(href);
+					targeturls.append(href)
 					break
 	except Exception as inst:
 		print type(inst)     # the exception instance
