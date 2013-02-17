@@ -26,14 +26,14 @@ for options in options_list:
 		data = response.read()
 	
 		dom = xml.dom.minidom.parseString(data)
-		responses = dom.getElementsByTagName("d:response")
+		responses = dom.getElementsByTagNameNS("DAV:","response")
 	
 		targeturls = []
 		now = datetime.datetime.now(rfc3339_parse.UTC_TZ)
 	
 		for r in responses:
-			href=r.getElementsByTagName("d:href")[0].childNodes[0].nodeValue
-			cdatestr=r.getElementsByTagName("d:creationdate")[0].childNodes[0].nodeValue
+			href=r.getElementsByTagNameNS("DAV:","href")[0].childNodes[0].nodeValue
+			cdatestr=r.getElementsByTagNameNS("DAV:","creationdate")[0].childNodes[0].nodeValue
 			cdatetime=rfc3339_parse.parse_datetime(cdatestr)
 #			print "found " +  href
 			for t in options["targets"]:
