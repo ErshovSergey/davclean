@@ -49,6 +49,7 @@ for options in options_list:
 
 	headers = {"Authorization": 'Basic ' + base64.encodestring(options["user"] + ':' + options["password"]).strip()}
 	for url in targeturls:
+		data = ""
 		try:
 #			print "removing " + href
 			conn.request("DELETE", url, "", headers)
@@ -60,8 +61,8 @@ for options in options_list:
 			print inst           # __str__ allows args to printed directly
 			returncode = 1
 			continue
-		if response.status != httplib.OK :
-			print "Failed DELETE on " + url
+		if response.status not in {httplib.OK, httplib.NO_CONTENT} :
+			print "Failed DELETE on %s: status=%d, response=\"%s\"" % (url, response.status, data)
 			returncode = 1
 
 sys.exit(returncode)
