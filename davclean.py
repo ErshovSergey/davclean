@@ -61,7 +61,7 @@ for options in options_list:
 			print inst           # __str__ allows args to printed directly
 			returncode = 1
 			continue
-		if response.status not in {httplib.OK, httplib.NO_CONTENT} :
+		if response.status not in (httplib.OK, httplib.NO_CONTENT):
 			print "Failed DELETE on %s: status=%d, response=\"%s\"" % (url, response.status, data)
 			returncode = 1
 
