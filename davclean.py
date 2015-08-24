@@ -9,8 +9,9 @@ import rfc3339_parse
 import datetime
 import sys
 import json
+import os
 
-f = open('/usr/local/etc/davclean.json', 'r')
+f = open(os.path.dirname(os.path.realpath(__file__))+'/davclean.json', 'r')
 options_list = json.load(f,"utf-8")
 f.close()
 returncode = 0
@@ -35,7 +36,7 @@ for options in options_list:
 			href=r.getElementsByTagNameNS("DAV:","href")[0].childNodes[0].nodeValue
 			cdatestr=r.getElementsByTagNameNS("DAV:","creationdate")[0].childNodes[0].nodeValue
 			cdatetime=rfc3339_parse.parse_datetime(cdatestr)
-#			print "found " +  href
+			print "found " +  href
 			for t in options["targets"]:
 				if href.startswith(t[0]) and ( ( now - datetime.timedelta(days=t[1])) >  cdatetime ):
 					targeturls.append(href)
@@ -51,7 +52,7 @@ for options in options_list:
 	for url in targeturls:
 		data = ""
 		try:
-#			print "removing " + href
+			print "removing " + href
 			conn.request("DELETE", url, "", headers)
 			response = conn.getresponse()
 			data = response.read()
